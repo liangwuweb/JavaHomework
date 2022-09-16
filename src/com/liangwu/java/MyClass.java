@@ -75,6 +75,7 @@ public class MyClass {
     public static int dealCard(boolean[] deck) {
         int cardIndex = new Random().nextInt(deck.length);
 
+        // avoid dealt card
         while(deck[cardIndex] == true) {
             cardIndex = new Random().nextInt(deck.length);
         }
