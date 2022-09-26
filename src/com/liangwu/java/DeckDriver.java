@@ -9,6 +9,7 @@ public class DeckDriver {
 
    public static void main(String[] args) {
        Deck myDeck = new Deck();
+       //SmartDeck myDeck = new SmartDeck();
 
        final int cardsPerRow = 8;
        int cardsThisRow = 0;
@@ -34,6 +35,13 @@ public class DeckDriver {
        }
        System.out.println('\n');
    }
+
+   // *******************************************************************************************
+
+    // given a card (an int in the range 0 to 51) returns
+    // an appropriate String repressentation of this card
+    // based on a 1-1 and onto mapping of the set [0, 51]
+    // to the cards described above.
 
     public static String cardToString(int card) {
         // Create all cards with two nested for loop

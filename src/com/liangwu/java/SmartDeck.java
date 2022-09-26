@@ -2,18 +2,20 @@ package com.liangwu.java;
 
 import java.util.Random;
 
-public class Deck {
+public class SmartDeck {
     private boolean[] deck = new boolean[52];
+    private int cardsDealt;
 
     //*************************************************************
 
     // This method set the values of deck to indicate that they are all
-    // present - not dealt yet
+    // present - not dealt yet; also set cardsDealt to 0
 
     public void initDeck() {
         for (int i = 0; i < this.deck.length; i++) {
             this.deck[i] = false;
         }
+        this.cardsDealt = 0;
     }
 
     //*************************************************************
@@ -22,12 +24,7 @@ public class Deck {
     // have already been dealt.
 
     public boolean emptyDeck() {
-        for (int i = 0; i < this.deck.length; i++) {
-            if (!this.deck[i]) {
-                return false;
-            }
-        }
-        return true;
+        return this.cardsDealt == this.deck.length;
     }
 
     //*************************************************************
@@ -45,6 +42,7 @@ public class Deck {
         }
 
         this.deck[cardIndex] = true; // set card to dealt
+        this.cardsDealt ++;
         return cardIndex;
     }
 }
