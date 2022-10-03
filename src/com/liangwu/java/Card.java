@@ -31,6 +31,10 @@ public class Card {
         this.suit = suit;
     }
 
+    // ***********************************************************************************
+
+    // Make a copy of Card
+
     public Card clone(String rank, String suit) {
         Card card = new Card();
 
@@ -38,27 +42,46 @@ public class Card {
         return card;
     }
 
+    // ***********************************************************************************
+
+    // Test if two cards equals to each other
+
     public boolean equals(Card guest) {
-        return this.rank.equals(guest.rank) &&
-                this.suit.equals(guest.suit);
+        String[] card = this.getCard();
+        String rank = card[0];
+        String suit = card[1];
+
+        String[] guestCard = guest.getCard();
+        String guestRank = guestCard[0];
+        String guestSuit = guestCard[1];
+
+        return rank.equals(guestRank) &&
+                suit.equals(guestSuit);
     }
+
+    // ***********************************************************************************
+
+    // Swap two cards' value
 
     public void swapCard(Card otherCard) {
-        String tempRank;
-        String tempSuit;
+        String[] otherCardData = otherCard.getCard();
+        String otherCardRank = otherCardData[0];
+        String otherCardSuit = otherCardData[1];
 
-        tempRank = otherCard.rank;
-        tempSuit = otherCard.suit;
+        String[] card = this.getCard();
+        String rank = card[0];
+        String suit = card[1];
 
-        otherCard.rank = this.rank;
-        otherCard.suit = this.suit;
-        this.rank = tempRank;
-        this.suit = tempSuit;
+        otherCard.setCard(rank, suit);
+        this.setCard(otherCardRank, otherCardSuit);
     }
 
+    // ***********************************************************************************
+
+    // Return String representation of the calling Card object's suit and rank
+
     public String toString() {
-//        String[] card = this.getCard();
-//        return card[0] + " of " + card[1];
-        return this.rank + " of " + this.suit;
+        String[] card = this.getCard();
+        return card[0] + " of " + card[1];
     }
 }

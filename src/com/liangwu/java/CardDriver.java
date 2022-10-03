@@ -12,6 +12,7 @@ public class CardDriver {
     static String[] suits = {"Clubs", "Spades", "Hearts", "Diamonds"};
 
     public static void main(String[] args) {
+
         // ***********************************************************************************
 
         // Fill the deck with the 52 unique playing cards (in any order).
@@ -96,10 +97,6 @@ public class CardDriver {
             }
         }
         
-        System.out.println("> The Queen of clubs was found at location " + location);
-
-        Card demo = new Card("Queen", "Diamonds");
-        //System.out.println(Arrays.toString(demo.getCard()));
-
+        System.out.println(ConsoleColors.GREEN_BOLD_BRIGHT + "> The Queen of clubs was found at location " + location + ConsoleColors.RESET);
     }
 }
