@@ -7,14 +7,11 @@ public class Card {
     private String suit;
 
     public Card() {
-        this.suit = "Clubs";
-        this.rank = "Ace";
+        this.setCard("Clubs", "Ace");
     }
 
     public Card(String rank, String suit) {
-        this.rank = rank;
-        this.suit = suit;
-
+        this.setCard(rank, suit);
     }
 
     public String[] getCard() {
