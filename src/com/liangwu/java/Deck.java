@@ -11,6 +11,11 @@ public class Deck {
     public static final String[] suits = {"Clubs", "Spades", "Hearts", "Diamonds"};
     private int cardsDealt;
 
+    // ***************************************************************************************************
+
+    // Specify Constructor, set each element of deck to a unique Card object,
+    // and sets cardsDealt to zero.
+
     public Deck() {
         // Fill the deck with the 52 unique playing cards (in any order).
         Card myCard = new Card();
@@ -27,28 +32,56 @@ public class Deck {
                 k++;
             }
         }
-        setCardsDealt(0);
+        this.collectAllCards();
     }
+
+    // ***************************************************************************************************
+
+    // accessor, return the value of deck.
 
     public Card[] getDeck() {
         return this.deck;
     }
 
+    // ***************************************************************************************************
+
+    // accessor, return the value of cardsDealt.
+
     public int getCardsDealt() {
         return this.cardsDealt;
     }
+
+    // ***************************************************************************************************
+
+    // mutator, set cardsDealt specified value (cardsDealt).
 
     public void setCardsDealt(int cardsDealt) {
         this.cardsDealt = cardsDealt;
     }
 
+    // ***************************************************************************************************
+
+    // returns wheather or not all the cards in deck have already been dealt (cardsDealt == 52).
+
     public boolean isEmptyDeck() {
         return this.getCardsDealt() == 52;
     }
 
+    // ***************************************************************************************************
+
+    // set cardsDealt to zero.
+
     public void collectAllCards() {
         setCardsDealt(0);
     }
+
+    // ***************************************************************************************************
+
+    // if emptyDeck() is false ...
+    // returns the card at location cardsDealt in deck,
+    // and increments cardsDealt by 1.
+    // else ...
+    // returns null
 
     public Card dealCard() {
         if (!this.isEmptyDeck()) {
@@ -61,9 +94,17 @@ public class Deck {
         }
     }
 
+    // ***************************************************************************************************
+
+    // apply 100 random card swaps within deck
+
     public void shuffleDeck() {
         shuffleDeck(100);
     }
+
+    // ***************************************************************************************************
+
+    // apply swapCnt random card swaps within deck
 
     public void shuffleDeck(int swapCnt) {
         for (int i = 0; i < swapCnt; i++){

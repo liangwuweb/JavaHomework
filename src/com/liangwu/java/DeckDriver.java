@@ -17,7 +17,6 @@ public class DeckDriver {
             if (cardsThisRow <= cardsPerRow)
             {
                 System.out.print(myDeck.dealCard().toString());
-                //System.out.print(myDeck.getCardsDealt());
                 System.out.print(", ");
             }
             else
@@ -28,7 +27,6 @@ public class DeckDriver {
                 System.out.print(", ");
             }
         }
-
         System.out.println("\n");
     }
 }
