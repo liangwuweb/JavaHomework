@@ -11,6 +11,10 @@ public class DynArray {
         nextIndex = 0;
     }
 
+    // accessor - get array
+    public double[] getArray() {
+        return this.array;
+    }
 
     // accessor
     public int arraySize() {
