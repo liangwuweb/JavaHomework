@@ -2,19 +2,12 @@ package com.liangwu.java;
 
 public class Driver {
     public static void main(String[] args) {
-        Member ryne = new Member("Ryne", 1);
-        Member Alice = new Member("Alice", 2);
-        Member Liang = new Member("Liang", 6);
-        Org org1 = new Org("Org one", new Leader("Alec", 3, "First year"));
-        Org org2 = new Org("Org two", new Leader("Joshua", 5, "Second year"));
+        Salaries org1 = new Salaries();
 
-        org1.addMembers(Liang);
-        org1.addMembers(Alice);
-        org2.addMembers(Liang);
-        org2.addMembers(ryne);
-
-        System.out.println(org1.toString());
-        System.out.println();
-        System.out.println(org2.toString());
+        org1.display("org1");
+        //System.out.println(org1.addTo("org1","org2Copy2", 9, 130_000, 1));
+        //System.out.println(org1.removeFrom("org1","org2Copy", 1));
+        //org1.addService("org1","org1Copy3");
+        System.out.println(org1.raise("org1", "org1Copy4", 1, 0.1));
     }
 }
