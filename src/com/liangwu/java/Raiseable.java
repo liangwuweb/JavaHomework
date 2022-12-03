@@ -18,5 +18,5 @@ public interface Raiseable {
     int raise(String inFileName, String outFileName, int yearsOfService,
               double salaryIncPercent);
 
-//    void mergeFiles(String inFileName1, String inFileName2, String outFileName);
+    void mergeFiles(String inFileName1, String inFileName2, String outFileName);
 }

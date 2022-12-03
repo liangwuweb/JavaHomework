@@ -167,4 +167,60 @@ public class Salaries implements Raiseable{
         return raised;
     }
 
+    public void mergeFiles(String inFileName1, String inFileName2, String outFileName) {
+        String line1 = null;
+        String line2 = null;
+
+        try(Scanner fileInOne = new Scanner(Paths.get(inFileName1));
+            Scanner fileInTwo = new Scanner(Paths.get(inFileName2));
+            PrintWriter fileOut = new PrintWriter(outFileName);) {
+
+            // Read first line of file one and file 2
+            line1 = fileInOne.hasNextLine() ? fileInOne.nextLine() : null;
+            line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null;
+
+            while (line1 != null || line2 != null) {
+                if (line1 == null && line2 != null) {
+                    // Since file1 is empty, we just output file2
+                    fileOut.println(line2);
+                    line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null;
+                } else if (line2 == null && line1 != null) {
+                    // Since file2 is empty, we just output file1
+                    fileOut.println(line1);
+                    line1 = fileInOne.hasNextLine() ? fileInOne.nextLine() : null;
+                } else if (line1 != null && line2 != null) {
+                    // Both file1 and file2 is not empty, we need to output their entry by ascending order
+                    String[] entryOne = line1.split(":");
+                    String[] entryTwo = line2.split(":");
+                    int entryOneId = Integer.parseInt(entryOne[0]);
+                    int entryTwoId = Integer.parseInt(entryTwo[0]);
+                    if (entryOneId < entryTwoId) {
+                        fileOut.println(line1); // print line 1
+                        // Move the pointer in file1
+                        line1 = fileInOne.hasNextLine() ? fileInOne.nextLine() : null; // keep line 2 for next iteration, only move pointer in file1
+                    } else if (entryOneId > entryTwoId) {
+                        fileOut.println(line2); //print line2
+                        // Move the pointer in file2
+                        line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null; // keep line 1 for next iteration, only move pointer in file2
+                    } else if (entryOneId == entryTwoId) {
+                        double entryOneSalary = Double.parseDouble(entryOne[1]);
+                        double entryTwoSalary = Double.parseDouble(entryTwo[1]);
+
+                        String output = entryOneSalary > entryTwoSalary ? line1 : line2;
+                        fileOut.println(output);
+
+                        // Since id matches, we need to move the pointer in file1 and file2
+                        line1 = fileInOne.hasNextLine() ? fileInOne.nextLine() : null;
+                        line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null;
+                    }
+                }
+            }
+        } catch (FileNotFoundException | InvalidPathException e) {
+            System.out.println("Filename invalid or not found");
+        }
+        catch (IOException e) {
+            System.out.println("File I/O error");
+        }
+    }
+
 }
