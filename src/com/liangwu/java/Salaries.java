@@ -168,8 +168,8 @@ public class Salaries implements Raiseable{
     }
 
     public void mergeFiles(String inFileName1, String inFileName2, String outFileName) {
-        String line1 = null;
-        String line2 = null;
+        String line1;
+        String line2;
 
         try(Scanner fileInOne = new Scanner(Paths.get(inFileName1));
             Scanner fileInTwo = new Scanner(Paths.get(inFileName2));
@@ -180,15 +180,15 @@ public class Salaries implements Raiseable{
             line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null;
 
             while (line1 != null || line2 != null) {
-                if (line1 == null && line2 != null) {
+                if (line1 == null) {
                     // Since file1 is empty, we just output file2
                     fileOut.println(line2);
                     line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null;
-                } else if (line2 == null && line1 != null) {
+                } else if (line2 == null) {
                     // Since file2 is empty, we just output file1
                     fileOut.println(line1);
                     line1 = fileInOne.hasNextLine() ? fileInOne.nextLine() : null;
-                } else if (line1 != null && line2 != null) {
+                } else {
                     // Both file1 and file2 is not empty, we need to output their entry by ascending order
                     String[] entryOne = line1.split(":");
                     String[] entryTwo = line2.split(":");
@@ -202,7 +202,7 @@ public class Salaries implements Raiseable{
                         fileOut.println(line2); //print line2
                         // Move the pointer in file2
                         line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null; // keep line 1 for next iteration, only move pointer in file2
-                    } else if (entryOneId == entryTwoId) {
+                    } else {
                         double entryOneSalary = Double.parseDouble(entryOne[1]);
                         double entryTwoSalary = Double.parseDouble(entryTwo[1]);
 

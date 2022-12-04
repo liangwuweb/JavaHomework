@@ -50,7 +50,12 @@ public class Demo {
     public static void main(String[] args) {
         Demo demo = new Demo();
 
-        demo.addTo("myFile");
+        //demo.addTo("myFile");
+        String value = "";
+
+        if (value == "") {
+            System.out.println("hello");
+        }
     }
 
 }
