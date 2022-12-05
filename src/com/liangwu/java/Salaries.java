@@ -19,6 +19,9 @@ public class Salaries implements Raiseable{
             myFile.createNewFile();
         } catch (IOException e) {
             System.out.println("Cannot create file");
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -30,6 +33,9 @@ public class Salaries implements Raiseable{
             }
         } catch (IOException e) {
             System.out.println("Cannot read file");
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -61,14 +67,14 @@ public class Salaries implements Raiseable{
             }
 
             // Is there is a match id, we just don't add the entry, just copy the file
-            if (!noMatch) {
+            if (noMatch) {
                 while(fileIn.hasNextLine()) {
                     fileOut.println(fileIn.nextLine());
                 }
             }
 
-            // If no match id, we append the data in the file
-            if (noMatch) {
+            // If there is not a match id, we append the data in the file
+            if (!noMatch) {
                 while(fileIn.hasNextLine()) {
                     fileOut.println(fileIn.nextLine());
                 }
@@ -79,6 +85,9 @@ public class Salaries implements Raiseable{
         }
         catch (IOException e) {
             System.out.println("File I/O error");
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+            System.out.println(e.getMessage());
         }
 
         return noMatch;
@@ -108,6 +117,9 @@ public class Salaries implements Raiseable{
         }
         catch (IOException e) {
             System.out.println("File I/O error");
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+            System.out.println(e.getMessage());
         }
 
         return match;
@@ -132,6 +144,9 @@ public class Salaries implements Raiseable{
         }
         catch (IOException e) {
             System.out.println("File I/O error");
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -163,6 +178,9 @@ public class Salaries implements Raiseable{
         }
         catch (IOException e) {
             System.out.println("File I/O error");
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+            System.out.println(e.getMessage());
         }
         return raised;
     }
@@ -220,6 +238,9 @@ public class Salaries implements Raiseable{
         }
         catch (IOException e) {
             System.out.println("File I/O error");
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+            System.out.println(e.getMessage());
         }
     }
 
