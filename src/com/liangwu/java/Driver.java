@@ -21,7 +21,7 @@ public class Driver {
         }
 
         // Display the file
-        System.out.println("Diplay the file: ");
+        System.out.println("Display the file: ");
         System.out.println();
         org1.display("myFile");
 
@@ -69,6 +69,10 @@ public class Driver {
             fileOut.println("2:68000.00:6");
             fileOut.println("4:95000.00:10");
             fileOut.println("6:88800.00:8");
+            fileOut.println("7:88800.00:8");
+            fileOut.println("8:88800.00:8");
+            fileOut.println("9:88800.00:8");
+            fileOut.println("10:88800.00:8");
         } catch (FileNotFoundException e) {
             System.out.println("Filename not found");
         }

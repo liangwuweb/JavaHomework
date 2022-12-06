@@ -50,8 +50,12 @@ public class Salaries implements Raiseable{
             while (fileIn.hasNextLine())  // while the input file is not empty
             {
                 line = fileIn.nextLine().trim();
-                String[] entry = line.split(":");
-                int entryId = Integer.parseInt(entry[0]);
+//                String[] entry = line.split(":");
+//                int entryId = Integer.parseInt(entry[0]);
+
+                int split1 = line.indexOf(":");
+                int entryId = Integer.parseInt(line.substring(0, split1));
+
                 if (entryId == id) {
                     break;
                 // if id is smaller than old entryId, we insert the new data before the entry
@@ -102,8 +106,12 @@ public class Salaries implements Raiseable{
         {
             while(fileIn.hasNextLine()) {
                 line = fileIn.nextLine().trim();
-                String[] entry = line.split(":");
-                int entryId = Integer.parseInt(entry[0]);
+//                String[] entry = line.split(":");
+//                int entryId = Integer.parseInt(entry[0]);
+
+                int split1 = line.indexOf(":");
+                int entryId = Integer.parseInt(line.substring(0, split1));
+
                 if (entryId == id) {
                     fileOut.print(""); // if match, we just don't copy the entry
                     match = true;
@@ -133,10 +141,13 @@ public class Salaries implements Raiseable{
         {
             while(fileIn.hasNextLine()) {
                 line = fileIn.nextLine().trim();
-                String[] entry = line.split(":");
-                int newEntryYear = Integer.parseInt(entry[2]) + 1;
-                int entryId = Integer.parseInt(entry[0]);
-                double entrySalary = Double.parseDouble(entry[1]);
+
+                int split1 = line.indexOf(":");
+                int split2 = line.lastIndexOf(":");
+                int entryId = Integer.parseInt(line.substring(0, split1));
+                int newEntryYear = Integer.parseInt(line.substring(split2 + 1)) + 1;
+                double entrySalary = Double.parseDouble(line.substring(split1 + 1, split2));
+
                 fileOut.println(entryId + ":" + df.format(entrySalary) + ":" + newEntryYear);
             }
         } catch (FileNotFoundException | InvalidPathException e) {
@@ -159,10 +170,11 @@ public class Salaries implements Raiseable{
         {
             while(fileIn.hasNextLine()) {
                 line = fileIn.nextLine().trim();
-                String[] entry = line.split(":");
-                int entryId = Integer.parseInt(entry[0]);
-                int entryYear = Integer.parseInt(entry[2]);
-                double entrySalary = Double.parseDouble(entry[1]);
+                int split1 = line.indexOf(":");
+                int split2 = line.lastIndexOf(":");
+                int entryId = Integer.parseInt(line.substring(0, split1));
+                int entryYear = Integer.parseInt(line.substring(split2 + 1));
+                double entrySalary = Double.parseDouble(line.substring(split1 + 1, split2));
                 double raisedSalary;
 
                 if (entryYear >= yearsOfService) {
@@ -197,21 +209,18 @@ public class Salaries implements Raiseable{
             line1 = fileInOne.hasNextLine() ? fileInOne.nextLine() : null;
             line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null;
 
-            while (line1 != null || line2 != null) {
-                if (line1 == null) {
-                    // Since file1 is empty, we just output file2
-                    fileOut.println(line2);
-                    line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null;
-                } else if (line2 == null) {
-                    // Since file2 is empty, we just output file1
-                    fileOut.println(line1);
-                    line1 = fileInOne.hasNextLine() ? fileInOne.nextLine() : null;
-                } else {
+
+
+            while (line1 != null && line2 != null) {
                     // Both file1 and file2 is not empty, we need to output their entry by ascending order
-                    String[] entryOne = line1.split(":");
-                    String[] entryTwo = line2.split(":");
-                    int entryOneId = Integer.parseInt(entryOne[0]);
-                    int entryTwoId = Integer.parseInt(entryTwo[0]);
+                    int split1 = line1.indexOf(":");
+                    int split2 = line1.lastIndexOf(":");
+                    int split3 = line2.indexOf(":");
+                    int split4 = line2.lastIndexOf(":");
+
+                    int entryOneId = Integer.parseInt(line1.substring(0, split1));
+                    int entryTwoId = Integer.parseInt(line2.substring(0, split3));
+
                     if (entryOneId < entryTwoId) {
                         fileOut.println(line1); // print line 1
                         // Move the pointer in file1
@@ -221,8 +230,8 @@ public class Salaries implements Raiseable{
                         // Move the pointer in file2
                         line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null; // keep line 1 for next iteration, only move pointer in file2
                     } else {
-                        double entryOneSalary = Double.parseDouble(entryOne[1]);
-                        double entryTwoSalary = Double.parseDouble(entryTwo[1]);
+                        double entryOneSalary = Double.parseDouble(line1.substring(split1 + 1, split2));
+                        double entryTwoSalary = Double.parseDouble(line2.substring(split3 + 1, split4));
 
                         String output = entryOneSalary > entryTwoSalary ? line1 : line2;
                         fileOut.println(output);
@@ -231,8 +240,24 @@ public class Salaries implements Raiseable{
                         line1 = fileInOne.hasNextLine() ? fileInOne.nextLine() : null;
                         line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null;
                     }
+            }
+
+           while (line1 != null || line2 != null) {
+                if (line1 != null) {
+                    // Since file2 is empty, we just output file1
+                    fileOut.println(line1);
+                    line1 = fileInOne.hasNextLine() ? fileInOne.nextLine() : null;
+                }
+
+                if (line2 != null) {
+                    // Since file1 is empty, we just output file2
+                    fileOut.println(line2);
+                    line2 = fileInTwo.hasNextLine() ? fileInTwo.nextLine() : null;
                 }
             }
+
+
+
         } catch (FileNotFoundException | InvalidPathException e) {
             System.out.println("Filename invalid or not found");
         }
